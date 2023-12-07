@@ -1,6 +1,7 @@
 import turtle
 import random
 
+
 def draw_polygon(num_sides, size, orientation, location, color, border_size):
     turtle.penup()
     turtle.goto(location[0], location[1])
@@ -13,13 +14,24 @@ def draw_polygon(num_sides, size, orientation, location, color, border_size):
         turtle.left(360/num_sides)
     turtle.penup()
 
+
 def get_new_color():
     return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
 
 turtle.speed(0)
 turtle.bgcolor('black')
 turtle.tracer(0)
 turtle.colormode(255)
+
+
+##########
+
+
+# choice = 0
+# while not 1 <= choice <= 8:
+#     choice = int(input('Which art do you want to generate? Enter a number between 1 to 8, inclusive: '))
+
 
 # draw a polygon at a random location, orientation, color, and border line thickness
 num_sides = random.randint(3, 5) # triangle, square, or pentagon
@@ -30,23 +42,30 @@ color = get_new_color()
 border_size = random.randint(1, 10)
 draw_polygon(num_sides, size, orientation, location, color, border_size)
 
+
+# if choice == 1:
+#     draw_polygon(3, size, orientation, location, color, border_size)
+
+
+
 # specify a reduction ratio to draw a smaller polygon inside the one above
 reduction_ratio = 0.618
 
 # reposition the turtle and get a new location
-turtle.penup()
-turtle.forward(size*(1-reduction_ratio)/2)
-turtle.left(90)
-turtle.forward(size*(1-reduction_ratio)/2)
-turtle.right(90)
-location[0] = turtle.pos()[0]
-location[1] = turtle.pos()[1]
+for i in range(10):
+    turtle.penup()
+    turtle.forward(size*(1-reduction_ratio)/2)
+    turtle.left(90)
+    turtle.forward(size*(1-reduction_ratio)/2)
+    turtle.right(90)
+    location[0] = turtle.pos()[0]
+    location[1] = turtle.pos()[1]
 
-# adjust the size according to the reduction ratio
-size *= reduction_ratio
+    # adjust the size according to the reduction ratio
+    size *= reduction_ratio
 
-# draw the second polygon embedded inside the original 
-draw_polygon(num_sides, size, orientation, location, color, border_size)
+    # draw the second polygon embedded inside the original
+    draw_polygon(num_sides, size, orientation, location, color, border_size)
 
 # hold the window; close it by clicking the window close 'x' mark
 turtle.done()
